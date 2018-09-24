@@ -16,7 +16,7 @@ class Button: UIButton {
     var shadowRadius: CGFloat?
     var borderColor: CGColor?
     var edgeInsets: UIEdgeInsets?
-    
+    var isToggle: Bool?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,7 +24,6 @@ class Button: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         self.backgorundColor()
         self.buttonPadding()
         self.edgeRadius()

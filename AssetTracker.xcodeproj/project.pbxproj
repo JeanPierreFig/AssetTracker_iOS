@@ -13,6 +13,7 @@
 		F7BE0C1F21590D2800D0727A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7BE0C1E21590D2800D0727A /* Assets.xcassets */; };
 		F7BE0C2221590D2800D0727A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7BE0C2021590D2800D0727A /* LaunchScreen.storyboard */; };
 		F7BE0C2A2159121600D0727A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE0C292159121600D0727A /* Button.swift */; };
+		F7BE0C2C21595F1F00D0727A /* MapOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE0C2B21595F1F00D0727A /* MapOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		F7BE0C2121590D2800D0727A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F7BE0C2321590D2800D0727A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7BE0C292159121600D0727A /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		F7BE0C2B21595F1F00D0727A /* MapOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOptions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				F7BE0C1721590D2500D0727A /* AppDelegate.swift */,
 				F7BE0C1921590D2500D0727A /* ViewController.swift */,
+				F7BE0C2B21595F1F00D0727A /* MapOptions.swift */,
 				F7BE0C292159121600D0727A /* Button.swift */,
 				F7BE0C1B21590D2600D0727A /* Main.storyboard */,
 				F7BE0C1E21590D2800D0727A /* Assets.xcassets */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7BE0C1A21590D2500D0727A /* ViewController.swift in Sources */,
+				F7BE0C2C21595F1F00D0727A /* MapOptions.swift in Sources */,
 				F7BE0C2A2159121600D0727A /* Button.swift in Sources */,
 				F7BE0C1821590D2500D0727A /* AppDelegate.swift in Sources */,
 			);
