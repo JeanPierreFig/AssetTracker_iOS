@@ -10,13 +10,12 @@ import Foundation
 import UIKit
 
 class Button: UIButton {
-    var color: UIColor?
-    var cornerRadius: CGFloat?
-    var borderWidth: CGFloat?
-    var shadowRadius: CGFloat?
-    var borderColor: CGColor?
-    var edgeInsets: UIEdgeInsets?
-    var isToggle: Bool?
+    var color: UIColor? //Set the background color.
+    var cornerRadius: CGFloat? //set the radius of the button.
+    var borderWidth: CGFloat? //Set the boarderWidth of the button.
+    var shadowRadius: CGFloat? //Set the dropShadow radius of the button.
+    var borderColor: CGColor? //Ser the borderColor of the button.
+    var isToggle: Bool? //Use this property to make the button a toggle button.
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,7 +38,7 @@ class Button: UIButton {
     }
     
     private func buttonPadding() {
-        self.contentEdgeInsets = edgeInsets ?? UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        self.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
     
     private func edgeRadius() {

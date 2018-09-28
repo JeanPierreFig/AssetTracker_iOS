@@ -8,9 +8,14 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 class ViewController: UIViewController {
-    
+
+    var coordinates = [CLLocationCoordinate2D]()
+    var path: MKPolyline!
+
+
     let mapView:MKMapView = {
         let map = MKMapView(frame: .zero)
         map.translatesAutoresizingMaskIntoConstraints = false
@@ -40,6 +45,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        self.getData()
     }
     
     private func setupView() {
@@ -63,6 +69,9 @@ class ViewController: UIViewController {
         optionsView.bottomAnchor.constraint(equalTo: optionsButton.topAnchor, constant: -20).isActive = true
     }
     
+    //MARK: Buttons
+    
+    //Show a list of map type to the user using the optionsView
     @objc private func optionsAction(sender: Button) {
         if sender.isToggle! {
             sender.isToggle = false
@@ -82,12 +91,49 @@ class ViewController: UIViewController {
             }, completion: nil)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    private func convertStringCoordinate(string: String) -> CLLocationCoordinate2D {
+        let coordinatArray = string.components(separatedBy: ",")
+        return CLLocationCoordinate2DMake(Double(coordinatArray[0]) ?? 0.0, Double(coordinatArray[1]) ?? 0.0)
     }
+    
+    //MARK: Firebase implimentation
+    private func getData() {
+        let ref =  Database.database().reference(withPath: "gpsdata/data")
+        let _ = ref.observe(DataEventType.value, with: { (snapshot) in
+           // let locationInfo = snapshot.value as? [String : AnyObject] ?? [:]
+            
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let location = snap.value as! [String: String]
+                self.coordinates.append(self.convertStringCoordinate(string: location["G"]!))
+            }
+    
+            self.path = MKPolyline(coordinates: self.coordinates, count: self.coordinates.count)
+            let regionRadius: CLLocationDistance = 200
+            let coordinateRegion = MKCoordinateRegionMakeWithDistance(self.coordinates.last!,regionRadius * 2.0, regionRadius * 2.0)
+            self.mapView.setRegion(coordinateRegion, animated: true)
+            self.mapView.add(self.path)
+
+            
+            
+//            self.mapView.addAnnotation(self.markerPin)
+//            self.mapView.setCenterCoordinate(self.markerPin.coordinate, animated: true)
+//            self.mapView.setRegion( MKCoordinateRegionMake(self.markerPin.coordinate, MKCoordinateSpanMake(self.rangeValue, self.rangeValue)), animated: true)
+//            if self.coordinates.count >= 2 {
+//                if self.path != nil {
+//                    self.mapView.remove(self.path)
+//                }
+//               // if self.shouldShowTrack == true {
+//                self.mapView.add(self.path)
+//                //}
+        })
+    }
+    
+    
 }
+
+//MARK: MapOptionsDelegate
 
 extension ViewController: MapOptionsDelegate {
     func didSetMapType(type: MKMapType) {
@@ -95,7 +141,15 @@ extension ViewController: MapOptionsDelegate {
     }
 }
 
+//MARK: MKMapViewDelegate
+
 extension ViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = UIColor.red
+        renderer.lineWidth = 5
+        return renderer
+    }
     
 }
 
