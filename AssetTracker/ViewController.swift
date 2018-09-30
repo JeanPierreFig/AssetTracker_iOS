@@ -40,6 +40,13 @@ class ViewController: UIViewController {
         return buttonsView
     }()
     
+    let battery: Battery = {
+        let battery = Battery(frame: .zero)
+        battery.battery(percent: 90.5)
+        battery.translatesAutoresizingMaskIntoConstraints = false
+        return battery
+    }()
+    
     lazy var leadingConstraint = optionsView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: -100)
 
     override func viewDidLoad() {
@@ -54,6 +61,7 @@ class ViewController: UIViewController {
         self.view.addSubview(mapView)
         self.view.addSubview(optionsButton)
         self.view.addSubview(optionsView)
+        self.view.addSubview(battery)
         
         mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -67,6 +75,11 @@ class ViewController: UIViewController {
         optionsView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         optionsView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         optionsView.bottomAnchor.constraint(equalTo: optionsButton.topAnchor, constant: -20).isActive = true
+        
+        battery.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        battery.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        battery.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        battery.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
     }
     
     //MARK: Buttons
@@ -113,20 +126,8 @@ class ViewController: UIViewController {
             let regionRadius: CLLocationDistance = 200
             let coordinateRegion = MKCoordinateRegionMakeWithDistance(self.coordinates.last!,regionRadius * 2.0, regionRadius * 2.0)
             self.mapView.setRegion(coordinateRegion, animated: true)
+            self.mapView.addAnnotation(AssetAnotation(coordinate: self.coordinates.last!))
             self.mapView.add(self.path)
-
-            
-            
-//            self.mapView.addAnnotation(self.markerPin)
-//            self.mapView.setCenterCoordinate(self.markerPin.coordinate, animated: true)
-//            self.mapView.setRegion( MKCoordinateRegionMake(self.markerPin.coordinate, MKCoordinateSpanMake(self.rangeValue, self.rangeValue)), animated: true)
-//            if self.coordinates.count >= 2 {
-//                if self.path != nil {
-//                    self.mapView.remove(self.path)
-//                }
-//               // if self.shouldShowTrack == true {
-//                self.mapView.add(self.path)
-//                //}
         })
     }
     
@@ -149,6 +150,22 @@ extension ViewController: MKMapViewDelegate {
         renderer.strokeColor = UIColor.red
         renderer.lineWidth = 5
         return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation
+        {
+            return nil
+        }
+        var annotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "Pin")
+        if annotationView == nil{
+            //annotationView = AnnotationView(annotation: annotation, reuseIdentifier: "Pin")
+            annotationView?.canShowCallout = false
+        }else{
+            annotationView?.annotation = annotation
+        }
+        annotationView?.image = UIImage(named: "starbucks")
+        return annotationView
     }
     
 }
