@@ -11,10 +11,16 @@ import MapKit
 import Firebase
 
 class ViewController: UIViewController {
-
-    var coordinates = [CLLocationCoordinate2D]()
+    
+    var halfModalTransitioningDelegate: HalfModalTransitioningDelegate?
+    var data = [AssetData]()
     var path: MKPolyline!
 
+    fileprivate var coordinates:[CLLocationCoordinate2D] {
+        return data.map({ (asset) -> CLLocationCoordinate2D  in
+            return asset.coordinates
+        })
+    }
 
     let mapView:MKMapView = {
         let map = MKMapView(frame: .zero)
@@ -40,13 +46,6 @@ class ViewController: UIViewController {
         return buttonsView
     }()
     
-    let battery: Battery = {
-        let battery = Battery(frame: .zero)
-        battery.battery(percent: 90.5)
-        battery.translatesAutoresizingMaskIntoConstraints = false
-        return battery
-    }()
-    
     lazy var leadingConstraint = optionsView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: -100)
 
     override func viewDidLoad() {
@@ -61,7 +60,6 @@ class ViewController: UIViewController {
         self.view.addSubview(mapView)
         self.view.addSubview(optionsButton)
         self.view.addSubview(optionsView)
-        self.view.addSubview(battery)
         
         mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -76,10 +74,6 @@ class ViewController: UIViewController {
         optionsView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         optionsView.bottomAnchor.constraint(equalTo: optionsButton.topAnchor, constant: -20).isActive = true
         
-        battery.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        battery.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        battery.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        battery.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
     }
     
     //MARK: Buttons
@@ -111,27 +105,48 @@ class ViewController: UIViewController {
     }
     
     //MARK: Firebase implimentation
+    
     private func getData() {
         let ref =  Database.database().reference(withPath: "gpsdata/data")
         let _ = ref.observe(DataEventType.value, with: { (snapshot) in
-           // let locationInfo = snapshot.value as? [String : AnyObject] ?? [:]
-            
+            //remove the data so that it does not dobule
+            self.data.removeAll(keepingCapacity: true)
             for child in snapshot.children {
                 let snap = child as! DataSnapshot
-                let location = snap.value as! [String: String]
-                self.coordinates.append(self.convertStringCoordinate(string: location["G"]!))
+                let dic = snap.value as? [String: String]
+                if let dic = dic {
+                    self.data.append(AssetData(battery: Float(dic["B"]!) ?? 0.0, coordinates: self.convertStringCoordinate(string: dic["G"]!), timeStamp: dic["t"]!))
+                     print(self.data.count)
+                }
             }
-    
-            self.path = MKPolyline(coordinates: self.coordinates, count: self.coordinates.count)
-            let regionRadius: CLLocationDistance = 200
-            let coordinateRegion = MKCoordinateRegionMakeWithDistance(self.coordinates.last!,regionRadius * 2.0, regionRadius * 2.0)
-            self.mapView.setRegion(coordinateRegion, animated: true)
-            self.mapView.addAnnotation(AssetAnotation(coordinate: self.coordinates.last!))
-            self.mapView.add(self.path)
+            self.showPath()
         })
     }
     
+    //MARK: Map Functions
+
+    private func showPath() {
+        if let p = self.path {
+            self.mapView.remove(p)
+            self.mapView.removeAnnotations(self.mapView.annotations)
+        }
+        self.path = MKPolyline(coordinates: self.coordinates, count: self.coordinates.count)
+        let regionRadius: CLLocationDistance = 200
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(self.coordinates.last!,regionRadius * 2.0, regionRadius * 2.0)
+        self.mapView.setRegion(coordinateRegion, animated: true)
+        let annotation = MKPointAnnotation()
+        annotation.title = "Sheldon"
+        annotation.coordinate = self.coordinates.last!
+        self.mapView.addAnnotation(annotation)
+        self.mapView.add(self.path)
+    }
     
+    private func getPinInCenter() {
+        let regionRadius: CLLocationDistance = 200
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(self.coordinates.last!,regionRadius * 2.0, regionRadius * 5)
+        self.mapView.setRegion(coordinateRegion, animated: true)
+
+    }
 }
 
 //MARK: MapOptionsDelegate
@@ -146,27 +161,31 @@ extension ViewController: MapOptionsDelegate {
 
 extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-        renderer.strokeColor = UIColor.red
-        renderer.lineWidth = 5
-        return renderer
+      
+            /* define a list of colors you want in your gradient */
+            let gradientColors = [UIColor.red,UIColor.yellow]
+            /* Initialise a JLTGradientPathRenderer with the colors */
+            let polylineRenderer = JLTGradientPathRenderer(polyline: overlay as! MKPolyline, colors: gradientColors)
+            /* set a linewidth */
+            polylineRenderer.lineWidth = 10
+            return polylineRenderer
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKUserLocation
-        {
-            return nil
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let controller = CardModelViewController()
+        controller.assetdData = data.last!
+        controller.coordinates = coordinates
+        self.halfModalTransitioningDelegate = HalfModalTransitioningDelegate(viewController: self, presentingViewController: controller)
+        controller.transitioningDelegate = self.halfModalTransitioningDelegate
+        controller.modalPresentationStyle = .custom
+        self.present(controller, animated: true, completion: nil)
+        
+        for anotation in mapView.annotations {
+            self.mapView.deselectAnnotation(anotation, animated: true)
         }
-        var annotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "Pin")
-        if annotationView == nil{
-            //annotationView = AnnotationView(annotation: annotation, reuseIdentifier: "Pin")
-            annotationView?.canShowCallout = false
-        }else{
-            annotationView?.annotation = annotation
-        }
-        annotationView?.image = UIImage(named: "starbucks")
-        return annotationView
+       
     }
+    
     
 }
 

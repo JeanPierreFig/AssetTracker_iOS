@@ -44,8 +44,7 @@ class Battery: UIView {
     
     let percentLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = Battery.description() + "%"
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.lightGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -73,7 +72,6 @@ class Battery: UIView {
         semiCirle.centerYAnchor.constraint(equalTo: body.centerYAnchor).isActive = true
         semiCirle.centerXAnchor.constraint(equalTo: body.centerXAnchor, constant: 14).isActive = true
         
-      
         percentLabel.trailingAnchor.constraint(equalTo: body.leadingAnchor, constant: -2).isActive = true
         percentLabel.centerYAnchor.constraint(equalTo: body.centerYAnchor, constant: 0).isActive = true
     }
@@ -102,6 +100,10 @@ class Battery: UIView {
             return 5
         }
         return width
+    }
+    
+    deinit {
+        print("Battery is ☠️")
     }
 
 }

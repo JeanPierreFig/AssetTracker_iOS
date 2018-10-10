@@ -8,10 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		2923D065CE241526E515624F /* Pods_AssetTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21572C98CB9289843A7E2CD1 /* Pods_AssetTracker.framework */; };
-		F7737440215E99E10052B7CD /* AssetAnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F773743F215E99E10052B7CD /* AssetAnotation.swift */; };
-		F7737442215EABF80052B7CD /* AssetAnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7737441215EABF80052B7CD /* AssetAnotationView.swift */; };
-		F7737444215EB0680052B7CD /* AnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7737443215EB0680052B7CD /* AnotationView.swift */; };
 		F7737446215EB1C70052B7CD /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7737445215EB1C70052B7CD /* Battery.swift */; };
+		F77374482161C1DC0052B7CD /* CardModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77374472161C1DC0052B7CD /* CardModelViewController.swift */; };
+		F773744D21627DCF0052B7CD /* Transitioning in Resources */ = {isa = PBXBuildFile; fileRef = F773744B21627DCE0052B7CD /* Transitioning */; };
+		F773744E21627DCF0052B7CD /* Presentation in Resources */ = {isa = PBXBuildFile; fileRef = F773744C21627DCE0052B7CD /* Presentation */; };
+		F77374502162813D0052B7CD /* HalfModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F773744F2162813D0052B7CD /* HalfModalPresentationController.swift */; };
+		F7737452216281410052B7CD /* HalfModalInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7737451216281410052B7CD /* HalfModalInteractiveTransition.swift */; };
+		F7737454216281440052B7CD /* HalfModalTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7737453216281440052B7CD /* HalfModalTransitionAnimator.swift */; };
+		F7737456216281490052B7CD /* HalfModalTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7737455216281490052B7CD /* HalfModalTransitioningDelegate.swift */; };
+		F773745821630DF70052B7CD /* AssetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F773745721630DF70052B7CD /* AssetData.swift */; };
+		F7737460216799BB0052B7CD /* JLTGradientPathRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F773745F216799BB0052B7CD /* JLTGradientPathRenderer.swift */; };
 		F77D7843215C01BB00D85ECC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F77D7842215C01BB00D85ECC /* GoogleService-Info.plist */; };
 		F7BE0C1821590D2500D0727A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE0C1721590D2500D0727A /* AppDelegate.swift */; };
 		F7BE0C1A21590D2500D0727A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE0C1921590D2500D0727A /* ViewController.swift */; };
@@ -26,10 +32,16 @@
 		21572C98CB9289843A7E2CD1 /* Pods_AssetTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssetTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B5382872DD99274BC3D35A2 /* Pods-AssetTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-AssetTracker/Pods-AssetTracker.release.xcconfig"; sourceTree = "<group>"; };
 		7C6BA0CD3FB5784AD129686D /* Pods-AssetTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssetTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AssetTracker/Pods-AssetTracker.debug.xcconfig"; sourceTree = "<group>"; };
-		F773743F215E99E10052B7CD /* AssetAnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAnotation.swift; sourceTree = "<group>"; };
-		F7737441215EABF80052B7CD /* AssetAnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAnotationView.swift; sourceTree = "<group>"; };
-		F7737443215EB0680052B7CD /* AnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnotationView.swift; sourceTree = "<group>"; };
 		F7737445215EB1C70052B7CD /* Battery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Battery.swift; sourceTree = "<group>"; };
+		F77374472161C1DC0052B7CD /* CardModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModelViewController.swift; sourceTree = "<group>"; };
+		F773744B21627DCE0052B7CD /* Transitioning */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Transitioning; sourceTree = "<group>"; };
+		F773744C21627DCE0052B7CD /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Presentation; sourceTree = "<group>"; };
+		F773744F2162813D0052B7CD /* HalfModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalPresentationController.swift; sourceTree = "<group>"; };
+		F7737451216281410052B7CD /* HalfModalInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalInteractiveTransition.swift; sourceTree = "<group>"; };
+		F7737453216281440052B7CD /* HalfModalTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalTransitionAnimator.swift; sourceTree = "<group>"; };
+		F7737455216281490052B7CD /* HalfModalTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalTransitioningDelegate.swift; sourceTree = "<group>"; };
+		F773745721630DF70052B7CD /* AssetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetData.swift; sourceTree = "<group>"; };
+		F773745F216799BB0052B7CD /* JLTGradientPathRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLTGradientPathRenderer.swift; sourceTree = "<group>"; };
 		F77D7842215C01BB00D85ECC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F7BE0C1421590D2500D0727A /* AssetTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssetTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7BE0C1721590D2500D0727A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +83,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F7737461216A7FD20052B7CD /* views */ = {
+			isa = PBXGroup;
+			children = (
+				F7BE0C2B21595F1F00D0727A /* MapOptions.swift */,
+				F7BE0C292159121600D0727A /* Button.swift */,
+				F7737445215EB1C70052B7CD /* Battery.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		F7737462216A80450052B7CD /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F7BE0C1921590D2500D0727A /* ViewController.swift */,
+				F77374472161C1DC0052B7CD /* CardModelViewController.swift */,
+				F773744F2162813D0052B7CD /* HalfModalPresentationController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		F7737463216A80580052B7CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F773745721630DF70052B7CD /* AssetData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F7BE0C0B21590D2500D0727A = {
 			isa = PBXGroup;
 			children = (
@@ -93,13 +133,15 @@
 			isa = PBXGroup;
 			children = (
 				F7BE0C1721590D2500D0727A /* AppDelegate.swift */,
-				F7BE0C1921590D2500D0727A /* ViewController.swift */,
-				F7BE0C2B21595F1F00D0727A /* MapOptions.swift */,
-				F7BE0C292159121600D0727A /* Button.swift */,
-				F773743F215E99E10052B7CD /* AssetAnotation.swift */,
-				F7737441215EABF80052B7CD /* AssetAnotationView.swift */,
-				F7737443215EB0680052B7CD /* AnotationView.swift */,
-				F7737445215EB1C70052B7CD /* Battery.swift */,
+				F7737463216A80580052B7CD /* Model */,
+				F7737462216A80450052B7CD /* controllers */,
+				F7737461216A7FD20052B7CD /* views */,
+				F7737451216281410052B7CD /* HalfModalInteractiveTransition.swift */,
+				F7737453216281440052B7CD /* HalfModalTransitionAnimator.swift */,
+				F7737455216281490052B7CD /* HalfModalTransitioningDelegate.swift */,
+				F773745F216799BB0052B7CD /* JLTGradientPathRenderer.swift */,
+				F773744C21627DCE0052B7CD /* Presentation */,
+				F773744B21627DCE0052B7CD /* Transitioning */,
 				F7BE0C1B21590D2600D0727A /* Main.storyboard */,
 				F7BE0C1E21590D2800D0727A /* Assets.xcassets */,
 				F7BE0C2021590D2800D0727A /* LaunchScreen.storyboard */,
@@ -173,6 +215,8 @@
 				F7BE0C1F21590D2800D0727A /* Assets.xcassets in Resources */,
 				F77D7843215C01BB00D85ECC /* GoogleService-Info.plist in Resources */,
 				F7BE0C1D21590D2600D0727A /* Main.storyboard in Resources */,
+				F773744E21627DCF0052B7CD /* Presentation in Resources */,
+				F773744D21627DCF0052B7CD /* Transitioning in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,14 +270,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7737440215E99E10052B7CD /* AssetAnotation.swift in Sources */,
+				F7737452216281410052B7CD /* HalfModalInteractiveTransition.swift in Sources */,
+				F77374482161C1DC0052B7CD /* CardModelViewController.swift in Sources */,
 				F7BE0C1A21590D2500D0727A /* ViewController.swift in Sources */,
 				F7BE0C2C21595F1F00D0727A /* MapOptions.swift in Sources */,
+				F7737460216799BB0052B7CD /* JLTGradientPathRenderer.swift in Sources */,
 				F7737446215EB1C70052B7CD /* Battery.swift in Sources */,
-				F7737442215EABF80052B7CD /* AssetAnotationView.swift in Sources */,
+				F7737456216281490052B7CD /* HalfModalTransitioningDelegate.swift in Sources */,
+				F7737454216281440052B7CD /* HalfModalTransitionAnimator.swift in Sources */,
 				F7BE0C2A2159121600D0727A /* Button.swift in Sources */,
-				F7737444215EB0680052B7CD /* AnotationView.swift in Sources */,
 				F7BE0C1821590D2500D0727A /* AppDelegate.swift in Sources */,
+				F773745821630DF70052B7CD /* AssetData.swift in Sources */,
+				F77374502162813D0052B7CD /* HalfModalPresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

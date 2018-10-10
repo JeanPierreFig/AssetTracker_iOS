@@ -100,4 +100,8 @@ class MapOptions: UIView {
         delegate.didSetMapType(type: .standard)
 
     }
+    
+    deinit {
+        print("Map option view is ☠️")
+    }
 }

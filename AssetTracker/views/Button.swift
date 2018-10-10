@@ -56,4 +56,8 @@ class Button: UIButton {
         self.layer.masksToBounds = false;
         self.layer.shadowPath = UIBezierPath(roundedRect:self.bounds, cornerRadius:cornerRadius ?? 0.0).cgPath
     }
+    
+    deinit {
+        print("Button is ☠️")
+    }
 }
