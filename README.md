@@ -2,7 +2,7 @@
 ![image1](https://github.com/JeanPierreFig/AssetTracker_iOS/blob/master/Screen%20Shot%202018-10-12%20at%204.49.09%20PM.png)
 ![image2](https://github.com/JeanPierreFig/AssetTracker_iOS/blob/master/Screen%20Shot%202018-10-12%20at%204.48.56%20PM.png)
 
-##### Note: This project was create as an opensource project for the particle community, but mainly to track my dog Sheldon. He likes to escape for a few hours... -_- 
+##### Note: This was create as an opensource project for the particle community, but mainly to track my dog Sheldon. He likes to escape for a few hours... -_- 
 
 The application is using webhooks to store the particle publish events to firebase. This way the app will not need to be open to receve/store the incoming data. 
 
